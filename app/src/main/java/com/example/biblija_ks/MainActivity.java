@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 import com.example.biblija_ks.databinding.ActivityMainBinding;
 
+import java.nio.charset.StandardCharsets;
+
 public class MainActivity extends AppCompatActivity {
 
     // Used to load the 'biblija_ks' library on application startup.
@@ -23,11 +25,14 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        String test_str = getString(R.string.test_str);
+        // TODO: Fix string encoding
+        String test_str = getString(R.string.matej_5);
+        byte[] bytes = test_str.getBytes(StandardCharsets.UTF_8);
+        String utf8EncodedString = new String(bytes, StandardCharsets.UTF_8);
 
         // Example of a call to a native method
         TextView tv = binding.sampleText;
-        tv.setText(stringFromJNI(test_str));
+        tv.setText(stringFromJNI(utf8EncodedString));
     }
 
     /**
