@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Biblija-KS</string>
+    <string name="test_str">Hello from test string!</string>
 </resources>

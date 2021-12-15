@@ -23,14 +23,16 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        String test_str = getString(R.string.test_str);
+
         // Example of a call to a native method
         TextView tv = binding.sampleText;
-        tv.setText(stringFromJNI());
+        tv.setText(stringFromJNI(test_str));
     }
 
     /**
      * A native method that is implemented by the 'biblija_ks' native library,
      * which is packaged with this application.
      */
-    public native String stringFromJNI();
+    public native String stringFromJNI(String path);
 }
