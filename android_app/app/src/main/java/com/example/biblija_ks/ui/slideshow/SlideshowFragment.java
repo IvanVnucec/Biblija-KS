@@ -19,8 +19,11 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.biblija_ks.R;
 import com.example.biblija_ks.databinding.FragmentSlideshowBinding;
 
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SlideshowFragment extends Fragment {
 
@@ -36,35 +39,38 @@ public class SlideshowFragment extends Fragment {
         View root = binding.getRoot();
 
         ListView listView = binding.listview;
-        ArrayList<String> arrayList = new ArrayList<>();
+        String bible_path = getString(R.string.bible_path);
+        final ArrayList<String> files = listAssetFiles(bible_path);
 
-        // TODO: add bible passages here
-        arrayList.add("bok");
-        arrayList.add("ja");
-        arrayList.add("sam");
-        arrayList.add("ivan");
+        ArrayList<String> bible_book_names = new ArrayList<String>();
+        for (String file : files) {
+            String book_name = file.replaceAll("_", " ");
+            bible_book_names.add(book_name);
+        }
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, arrayList);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, bible_book_names);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "clicked item " + i + " " + arrayList.get(i).toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "clicked item " + bible_book_names.get(i).toString(), Toast.LENGTH_SHORT).show();
             }
         });
-
-        /*
-        final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        */
 
         return root;
+    }
+
+    private ArrayList<String> listAssetFiles(String path) {
+        ArrayList<String> stringList = null;
+
+        try {
+            String [] list = this.getActivity().getAssets().list(path);
+            stringList = new ArrayList<String>(Arrays.asList(list));
+        } catch (IOException e) {
+        }
+
+        return stringList;
     }
 
     @Override
