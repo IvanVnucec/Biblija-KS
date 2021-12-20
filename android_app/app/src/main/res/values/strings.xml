@@ -12,4 +12,6 @@
     <string name="menu_slideshow">Slideshow</string>
 
     <string name="bible_path">"bible"</string>
+    <string name="bible_text_example">bible text example</string>
+    <string name="textview">TextView</string>
 </resources>

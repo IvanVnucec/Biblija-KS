@@ -1,5 +1,6 @@
 package com.example.biblija_ks.ui.slideshow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.biblija_ks.R;
+import com.example.biblija_ks.ShowBibleTextActivity;
 import com.example.biblija_ks.databinding.FragmentSlideshowBinding;
 
 import java.io.File;
@@ -54,7 +56,13 @@ public class SlideshowFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), "clicked item " + bible_book_names.get(i).toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), ShowBibleTextActivity.class);
+
+                // TODO: get text from bible chapter
+                String bible_text = "TODO: put bible text here";
+                intent.putExtra("bible_heading", bible_book_names.get(i));
+                intent.putExtra("bible_text", "TODO: Get text here");
+                startActivity(intent);
             }
         });
 
