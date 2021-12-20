@@ -1,28 +1,24 @@
 package com.example.biblija_ks;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.text.Html;
-import android.widget.TextView;
+import android.view.View;
+import android.view.Menu;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.biblija_ks.databinding.ActivityMainBinding;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.stream.Collectors;
-
 public class MainActivity extends AppCompatActivity {
 
-    // Used to load the 'biblija_ks' library on application startup.
-    static {
-        System.loadLibrary("biblija_ks");
-    }
-
+    private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
     @Override
@@ -32,33 +28,38 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        InputStream inputStream = null;
-        AssetManager mngr = getAssets();
-        try {
-            inputStream = mngr.open("bible/Amos/Amos_-_1.html");
-        } catch (final IOException e) {
-            e.printStackTrace();
-        }
-
-        String result = new BufferedReader(new InputStreamReader(inputStream))
-                .lines().collect(Collectors.joining("\n"));
-
-        // Example of a call to a native method
-        TextView tv = binding.sampleText;
-
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            tv.setText(Html.fromHtml(result, Html.FROM_HTML_MODE_LEGACY));
-        } else {
-            tv.setText(Html.fromHtml(result));
-        }
-
-        // call cpp code
-        //tv.setText(stringFromJNI(result));
+        setSupportActionBar(binding.appBarMain.toolbar);
+        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        DrawerLayout drawer = binding.drawerLayout;
+        NavigationView navigationView = binding.navView;
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                .setOpenableLayout(drawer)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
     }
 
-    /**
-     * A native method that is implemented by the 'biblija_ks' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI(String path);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
+    }
 }
