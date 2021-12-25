@@ -31,9 +31,13 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                showTextFromBibleChapter(chapter_names.get(i));
+            }
+
+            private void showTextFromBibleChapter(String chapter) {
                 Intent intent = new Intent(getApplicationContext(), ShowBibleChapterTextActivity.class);
-                
-                String chapter_path = BIBLE_DIR_PATH + '/' + book_name + '/' + chapter_names.get(i);
+
+                String chapter_path = BIBLE_DIR_PATH + '/' + book_name + '/' + chapter;
                 intent.putExtra(getString(R.string.extra_chapter_path), chapter_path);
                 startActivity(intent);
             }

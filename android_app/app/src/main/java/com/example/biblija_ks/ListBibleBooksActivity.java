@@ -30,9 +30,13 @@ public class ListBibleBooksActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                listBibleChaptersFromBook(book_names.get(i));
+            }
+
+            private void listBibleChaptersFromBook(String book_name) {
                 Intent intent = new Intent(getApplicationContext(), ListBibleChaptersActivity.class);
 
-                intent.putExtra(getString(R.string.extra_book_name), book_names.get(i));
+                intent.putExtra(getString(R.string.extra_book_name), book_name);
                 startActivity(intent);
             }
         });
