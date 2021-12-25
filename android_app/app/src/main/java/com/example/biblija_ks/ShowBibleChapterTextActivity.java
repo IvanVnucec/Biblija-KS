@@ -1,11 +1,14 @@
 package com.example.biblija_ks;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.TypedValue;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class ShowBibleChapterTextActivity extends AppCompatActivity {
@@ -33,11 +37,27 @@ public class ShowBibleChapterTextActivity extends AppCompatActivity {
     private void writeChapterTextToTextView(String chapter_text) {
         TextView textView = findViewById(R.id.bible_chapter_text);
 
+        int text_size_px = getTextSizeFromSettingsInPx();
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, text_size_px);
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             textView.setText(Html.fromHtml(chapter_text, Html.FROM_HTML_MODE_COMPACT));
         } else {
             textView.setText(Html.fromHtml(chapter_text));
         }
+    }
+    
+    private int getTextSizeFromSettingsInPx() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        Map<String, ?> all = prefs.getAll();
+        String signature = String.valueOf(all.get(new String("signature")));
+
+        int text_dimen = getResources().getDimensionPixelSize(R.dimen.bible_text_size);
+        if (signature.equals("asd")) {
+            text_dimen *= 3;
+        }
+
+        return text_dimen;
     }
 
     private String getChapterText(String chapter_path) {

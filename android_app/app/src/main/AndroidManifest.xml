@@ -10,6 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BiblijaKS">
         <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".ListBibleBooksActivity"/>
+        <activity
             android:name=".ShowBibleChapterTextActivity"
             android:exported="false" />
         <activity

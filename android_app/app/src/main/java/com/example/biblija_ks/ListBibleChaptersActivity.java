@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Scanner;
 
 public class ListBibleChaptersActivity extends AppCompatActivity {
     private static final String BIBLE_DIR_PATH = "bible";
@@ -66,15 +67,30 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
     }
 
     private ArrayList<String> getBibleChapterNames(String book_name) {
-        ArrayList<String> stringList = null;
+        ArrayList<String> chapter_names = null;
 
         try {
             String [] list = this.getAssets().list(BIBLE_DIR_PATH + '/' + book_name);
-            stringList = new ArrayList<String>(Arrays.asList(list));
+            chapter_names = new ArrayList<String>(Arrays.asList(list));
         } catch (IOException e) {
             finish();
         }
 
-        return stringList;
+        Comparator<? super String> ascending_comparator = new Comparator<String>() {
+            public int compare(String name1, String name2) {
+                int num1 = new Scanner(name1).useDelimiter("\\D+").nextInt();
+                int num2 = new Scanner(name2).useDelimiter("\\D+").nextInt();
+                // > : Increasing order
+                // < : Decreasing order
+                if(num1 > num2)
+                    return 1;
+                else
+                    return -1;
+            }
+        };
+
+        Collections.sort(chapter_names, ascending_comparator);
+
+        return chapter_names;
     }
 }
