@@ -22,15 +22,16 @@ public class ListBibleBooksActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list_bible_books);
 
         ListView listView = findViewById(R.id.activity_list_bible_books);
-        ArrayList<String> book_names = getBibleBookNames();
+        ArrayList<String> book_filenames = getBookFilenamesFromPath(BIBLE_DIR_PATH);
+        ArrayList<String> book_names_clean = getCleanBookNames(book_filenames);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.list_view_row, book_names);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.list_view_row, book_names_clean);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                listBibleChaptersFromBook(book_names.get(i));
+                listBibleChaptersFromBook(book_filenames.get(i));
             }
 
             private void listBibleChaptersFromBook(String book_name) {
@@ -42,13 +43,24 @@ public class ListBibleBooksActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList<String> getBibleBookNames() {
+    private ArrayList<String> getCleanBookNames(ArrayList<String> book_filenames) {
+        ArrayList<String> clean_book_names = new ArrayList<>();
+
+        for(String book_name : book_filenames) {
+            clean_book_names.add(book_name.replaceAll("_", " "));
+        }
+
+        return clean_book_names;
+    }
+
+    private ArrayList<String> getBookFilenamesFromPath(String path) {
         ArrayList<String> stringList = null;
 
         try {
-            String [] list = this.getAssets().list(BIBLE_DIR_PATH);
+            String [] list = this.getAssets().list(path);
             stringList = new ArrayList<String>(Arrays.asList(list));
         } catch (IOException e) {
+            finish();
         }
 
         return stringList;

@@ -12,6 +12,8 @@ import android.widget.ListView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class ListBibleChaptersActivity extends AppCompatActivity {
     private static final String BIBLE_DIR_PATH = "bible";
@@ -23,15 +25,16 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
 
         String book_name = getBookName();
         ListView listView = findViewById(R.id.activity_list_bible_chapters);
-        ArrayList<String> chapter_names = getBibleChapterNames(book_name);
+        ArrayList<String> chapter_filenames = getBibleChapterNames(book_name);
+        ArrayList<String> chapter_names_clean = getCleanChapterNames(chapter_filenames);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.list_view_row, chapter_names);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.list_view_row, chapter_names_clean);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                showTextFromBibleChapter(chapter_names.get(i));
+                showTextFromBibleChapter(chapter_filenames.get(i));
             }
 
             private void showTextFromBibleChapter(String chapter) {
@@ -42,6 +45,19 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private ArrayList<String> getCleanChapterNames(ArrayList<String> chapter_filenames) {
+        ArrayList<String> clean_book_names = new ArrayList<>();
+
+        for(String book_name : chapter_filenames) {
+            book_name = book_name
+                    .replaceAll("_", " ")
+                    .replaceAll(".html", "");
+            clean_book_names.add(book_name);
+        }
+
+        return clean_book_names;
     }
 
     private String getBookName() {

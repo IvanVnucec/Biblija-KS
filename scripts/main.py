@@ -52,11 +52,13 @@ for book in bible.books:
 BIBLE_PATH = 'bible'
 Path(BIBLE_PATH).mkdir(parents=True, exist_ok=True)
 for book in bible.books:
-    book_path = f"{BIBLE_PATH}/{book.name}"
+    book_name = book.name.replace("__", "_") # some strings have two underscores
+    book_path = f"{BIBLE_PATH}/{book_name}"
     Path(book_path).mkdir(parents=True, exist_ok=True)
     print(book_path)
     for chapter in book.chapters:
-        chapter_filename = chapter.name + ".html"
+        chapter_name = chapter.name.replace("__", "_")
+        chapter_filename = chapter_name + ".html"
         chapter_path = f"{book_path}/{chapter_filename}"
         print('\t', chapter_path)
         with open(chapter_path, "w") as file:
