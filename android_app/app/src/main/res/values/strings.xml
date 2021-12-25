@@ -2,4 +2,5 @@
     <string name="app_name">Biblija-KS</string>
     <string name="extra_book_name">book_name</string>
     <string name="extra_chapter_path">chapter_path</string>
+    <string name="bible_text">Bible text</string>
 </resources>
