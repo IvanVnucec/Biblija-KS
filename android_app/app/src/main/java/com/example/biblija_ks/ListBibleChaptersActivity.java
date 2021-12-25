@@ -72,6 +72,7 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
             String [] list = this.getAssets().list(BIBLE_DIR_PATH + '/' + book_name);
             stringList = new ArrayList<String>(Arrays.asList(list));
         } catch (IOException e) {
+            finish();
         }
 
         return stringList;
