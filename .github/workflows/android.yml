@@ -1,6 +1,7 @@
 name: Android CI
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
   pull_request:
@@ -10,9 +11,9 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: android_app
+    #defaults:
+      #run:
+        #working-directory: android_app
 
     steps:
     - uses: actions/checkout@v2
@@ -24,7 +25,43 @@ jobs:
         cache: gradle
 
     - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+      run: cd android_app && chmod +x gradlew
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: cd android_app && ./gradlew build
+
+    - name: Build Release AAB
+      run: |
+        cd android_app && ./gradlew bundleRelease
+        sudo apt-get install tree
+        tree .
+
+    - uses: r0adkll/sign-android-release@v1
+      name: Sign app APK
+      # ID used to access action output
+      id: sign_app
+      with:
+        releaseDirectory: android_app/app/build/outputs/bundle/release
+        signingKeyBase64: ${{ secrets.SIGNING_KEY }}
+        alias: ${{ secrets.ALIAS }}
+        keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
+        keyPassword: ${{ secrets.KEY_PASSWORD }}
+
+    - name: Convert .aab to .apk
+      run: |
+        wget -q "https://github.com/google/bundletool/releases/download/1.8.2/bundletool-all-1.8.2.jar"
+        java -jar bundletool-all-1.8.2.jar build-apks --bundle=${{steps.sign_app.outputs.signedReleaseFile}} --output=./app.apks
+      #  java -jar bundletool-all-1.8.2.jar install-apks --apks=app.apks
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: Signed app bundle
+        path: ./app.apks
+
+      #- name: Deploy to Play Store
+      #  uses: r0adkll/upload-google-play@v1
+      #  with:
+      #    serviceAccountJsonPlainText: ${{secrets.SERVICE_ACCOUNT}}
+      #    packageName: com.tomerpacific.laundry
+      #    releaseFiles: app/build/outputs/bundle/release/app-release.aab
+      #    track: production
