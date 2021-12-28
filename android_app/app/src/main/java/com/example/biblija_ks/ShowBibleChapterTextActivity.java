@@ -50,14 +50,9 @@ public class ShowBibleChapterTextActivity extends AppCompatActivity {
     private int getTextSizeFromSettingsInPx() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         Map<String, ?> all = prefs.getAll();
-        String signature = String.valueOf(all.get(new String("signature")));
-
-        int text_dimen = getResources().getDimensionPixelSize(R.dimen.bible_text_size);
-        if (signature.equals("asd")) {
-            text_dimen *= 3;
-        }
-
-        return text_dimen;
+        // TODO: fix for when user inputs non number values
+        int text_size_pref = Integer.valueOf(String.valueOf(all.get(new String("text_size"))));
+        return text_size_pref;
     }
 
     private String getChapterText(String chapter_path) {
