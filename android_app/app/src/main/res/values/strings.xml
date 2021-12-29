@@ -8,4 +8,5 @@
     <!-- Preference Titles -->
     <string name="text_header">Text</string>
     <string name="text_size_title">Text size</string>
+    <string name="bible_text_size_key">text_size</string>
 </resources>

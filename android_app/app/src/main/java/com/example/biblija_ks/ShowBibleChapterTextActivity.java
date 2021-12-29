@@ -51,7 +51,14 @@ public class ShowBibleChapterTextActivity extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         Map<String, ?> all = prefs.getAll();
         // TODO: fix for when user inputs non number values
-        int text_size_pref = Integer.valueOf(String.valueOf(all.get(new String("text_size"))));
+
+        int text_size_pref;
+        try {
+            text_size_pref = Integer.valueOf(String.valueOf(all.get(new String("text_size"))));
+        } catch (Exception e) {
+            text_size_pref = (int) getResources().getDimension(R.dimen.bible_text_size_px);
+        }
+
         return text_size_pref;
     }
 
