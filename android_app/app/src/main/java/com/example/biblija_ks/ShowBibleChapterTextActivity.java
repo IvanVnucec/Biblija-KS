@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Spanned;
 import android.util.TypedValue;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -37,14 +38,26 @@ public class ShowBibleChapterTextActivity extends AppCompatActivity {
     private void writeChapterTextToTextView(String chapter_text) {
         TextView textView = findViewById(R.id.bible_chapter_text);
 
+        // format row number as html superscript
+        // TODO: sup style font-size does not scale down the superscript font size
+        chapter_text = chapter_text
+                .replaceAll("<span class=\"brojRetka\" id=\"", "<sup style=\"font-size:75%\"><span class=\"brojRetka\" id=\"")
+                .replaceAll("</span>", "</span></sup>");
+
+        // set text size
         int text_size_px = getTextSizeFromSettingsInPx();
         textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, text_size_px);
 
+        // convert text to html
+        Spanned html_text;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            textView.setText(Html.fromHtml(chapter_text, Html.FROM_HTML_MODE_COMPACT));
+            html_text = Html.fromHtml(chapter_text, Html.FROM_HTML_MODE_COMPACT);
         } else {
-            textView.setText(Html.fromHtml(chapter_text));
+            html_text = Html.fromHtml(chapter_text);
         }
+
+        // display html
+        textView.setText(html_text);
     }
     
     private int getTextSizeFromSettingsInPx() {
