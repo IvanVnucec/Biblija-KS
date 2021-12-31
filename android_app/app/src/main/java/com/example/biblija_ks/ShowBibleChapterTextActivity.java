@@ -10,19 +10,12 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.TypedValue;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Map;
-import java.util.stream.Stream;
 
 public class ShowBibleChapterTextActivity extends AppCompatActivity {
     @Override
