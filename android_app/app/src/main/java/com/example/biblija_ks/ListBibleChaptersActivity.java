@@ -10,10 +10,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
 
 public class ListBibleChaptersActivity extends AppCompatActivity {
@@ -24,7 +26,8 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_bible_chapters);
 
-        String book_name = getBookName();
+        Intent intent = getIntent();
+        String book_name = getBookName(intent);
         ListView listView = findViewById(R.id.activity_list_bible_chapters);
         ArrayList<String> chapter_filenames = getBibleChapterNames(book_name);
         ArrayList<String> chapter_names_clean = getCleanChapterNames(chapter_filenames);
@@ -35,14 +38,17 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                showTextFromBibleChapter(chapter_filenames.get(i));
+                showTextFromBibleChapters(chapter_filenames, i);
             }
 
-            private void showTextFromBibleChapter(String chapter) {
-                Intent intent = new Intent(getApplicationContext(), ShowBibleChapterTextActivity.class);
+            private void showTextFromBibleChapters(ArrayList<String> chapters, int wanted_chapter_index) {
+                ArrayList<String> chapter_paths = new ArrayList<>();
+                for (String chapter : chapters)
+                    chapter_paths.add(BIBLE_DIR_PATH + '/' + book_name + '/' + chapter);
 
-                String chapter_path = BIBLE_DIR_PATH + '/' + book_name + '/' + chapter;
-                intent.putExtra(getString(R.string.extra_chapter_path), chapter_path);
+                Intent intent = new Intent(getApplicationContext(), ShowBibleChapterTextActivity.class);
+                intent.putExtra(getString(R.string.extra_chapter_path), chapter_paths);
+                intent.putExtra(getString(R.string.wanted_chapter_index), wanted_chapter_index);
                 startActivity(intent);
             }
         });
@@ -61,8 +67,7 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
         return clean_book_names;
     }
 
-    private String getBookName() {
-        Intent intent = getIntent();
+    private String getBookName(Intent intent) {
         return intent.getStringExtra(getString(R.string.extra_book_name));
     }
 
