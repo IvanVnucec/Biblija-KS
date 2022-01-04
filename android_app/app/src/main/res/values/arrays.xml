@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sorted_bible_book_names">
+        <item>Knjiga Postanka</item>
+        <item>Knjiga Izlaska</item>
+        <item>Levitski zakonik</item>
+        <item>Knjiga Brojeva</item>
+        <item>Ponovljeni zakon</item>
+        <item>Jošua</item>
+        <item>Knjiga o Sucima</item>
+        <item>Knjiga o Ruti</item>
+        <item>Prva knjiga o Samuelu</item>
+        <item>Druga knjiga o Samuelu</item>
+        <item>Prva knjiga o Kraljevima</item>
+        <item>Druga knjiga o Kraljevima</item>
+        <item>Prva Knjiga Ljetopisa</item>
+        <item>Druga Knjiga Ljetopisa</item>
+        <item>Ezra</item>
+        <item>Nehemija</item>
+        <item>Tobija</item>
+        <item>Judita</item>
+        <item>Estera</item>
+        <item>Prva knjiga o Makabejcima</item>
+        <item>Druga knjiga o Makabejcima</item>
+        <item>Knjiga o Jobu</item>
+        <item>Psalmi</item>
+        <item>Mudre izreke</item>
+        <item>Propovjednik</item>
+        <item>Pjesma nad pjesmama</item>
+        <item>Knjiga Mudrosti</item>
+        <item>Knjiga Sirahova</item>
+        <item>Izaija</item>
+        <item>Jeremija</item>
+        <item>Tužaljke</item>
+        <item>Baruh</item>
+        <item>Ezekiel</item>
+        <item>Daniel</item>
+        <item>Hošea</item>
+        <item>Joel</item>
+        <item>Amos</item>
+        <item>Obadija</item>
+        <item>Jona</item>
+        <item>Mihej</item>
+        <item>Nahum</item>
+        <item>Habakuk</item>
+        <item>Sefanija</item>
+        <item>Hagaj</item>
+        <item>Zaharija</item>
+        <item>Malahija</item>
+        <item>Evanđelje po Mateju</item>
+        <item>Evanđelje po Marku</item>
+        <item>Evanđelje po Luki</item>
+        <item>Evanđelje po Ivanu</item>
+        <item>Djela apostolska</item>
+        <item>Poslanica Rimljanima</item>
+        <item>Prva poslanica Korinćanima</item>
+        <item>Druga poslanica Korinćanima</item>
+        <item>Poslanica Galaćanima</item>
+        <item>Poslanica Efežanima</item>
+        <item>Poslanica Filipljanima</item>
+        <item>Poslanica Kološanima</item>
+        <item>Prva poslanica Solunjanima</item>
+        <item>Druga poslanica Solunjanima</item>
+        <item>Prva poslanica Timoteju</item>
+        <item>Druga poslanica Timoteju</item>
+        <item>Poslanica Titu</item>
+        <item>Poslanica Filemonu</item>
+        <item>Poslanica Hebrejima</item>
+        <item>Jakovljeva poslanica</item>
+        <item>Prva Petrova poslanica</item>
+        <item>Druga Petrova poslanica</item>
+        <item>Prva Ivanova poslanica</item>
+        <item>Druga Ivanova poslanica</item>
+        <item>Treća Ivanova poslanica</item>
+        <item>Poslanica Jude apostola</item>
+        <item>Otkrivenje</item>
+    </string-array>
+
+    <string-array name="sorted_bible_book_paths">
+        <item></item>
+        <item></item>
+        <item>Levitski zakonik</item>
+        <item>Knjiga Brojeva</item>
+        <item>Ponovljeni zakon</item>
+        <item>Jošua</item>
+        <item>Knjiga o Sucima</item>
+        <item>Knjiga o Ruti</item>
+        <item>Prva knjiga o Samuelu</item>
+        <item>Druga knjiga o Samuelu</item>
+        <item>Prva knjiga o Kraljevima</item>
+        <item>Druga knjiga o Kraljevima</item>
+        <item>Prva Knjiga Ljetopisa</item>
+        <item>Druga Knjiga Ljetopisa</item>
+        <item>Ezra</item>
+        <item>Nehemija</item>
+        <item>Tobija</item>
+        <item>Judita</item>
+        <item>Estera</item>
+        <item>Prva knjiga o Makabejcima</item>
+        <item>Druga knjiga o Makabejcima</item>
+        <item>Knjiga o Jobu</item>
+        <item>Psalmi</item>
+        <item>Mudre izreke</item>
+        <item>Propovjednik</item>
+        <item>Pjesma nad pjesmama</item>
+        <item>Knjiga Mudrosti</item>
+        <item>Knjiga Sirahova</item>
+        <item>Izaija</item>
+        <item>Jeremija</item>
+        <item>Tužaljke</item>
+        <item>Baruh</item>
+        <item>Ezekiel</item>
+        <item>Daniel</item>
+        <item>Hošea</item>
+        <item>Joel</item>
+        <item>Amos</item>
+        <item>Obadija</item>
+        <item>Jona</item>
+        <item>Mihej</item>
+        <item>Nahum</item>
+        <item>Habakuk</item>
+        <item>Sefanija</item>
+        <item>Hagaj</item>
+        <item>Zaharija</item>
+        <item>Malahija</item>
+        <item>Evanđelje po Mateju</item>
+        <item>Evanđelje po Marku</item>
+        <item>Evanđelje po Luki</item>
+        <item>Evanđelje po Ivanu</item>
+        <item>Djela apostolska</item>
+        <item>Poslanica Rimljanima</item>
+        <item>Prva poslanica Korinćanima</item>
+        <item>Druga poslanica Korinćanima</item>
+        <item>Poslanica Galaćanima</item>
+        <item>Poslanica Efežanima</item>
+        <item>Poslanica Filipljanima</item>
+        <item>Poslanica Kološanima</item>
+        <item>Prva poslanica Solunjanima</item>
+        <item>Druga poslanica Solunjanima</item>
+        <item>Prva poslanica Timoteju</item>
+        <item>Druga poslanica Timoteju</item>
+        <item>Poslanica Titu</item>
+        <item>Poslanica Filemonu</item>
+        <item>Poslanica Hebrejima</item>
+        <item>Jakovljeva poslanica</item>
+        <item>Prva Petrova poslanica</item>
+        <item>Druga Petrova poslanica</item>
+        <item>Prva Ivanova poslanica</item>
+        <item>Druga Ivanova poslanica</item>
+        <item>Treća Ivanova poslanica</item>
+        <item>Poslanica Jude apostola</item>
+        <item>Otkrivenje</item>
+    </string-array>
+</resources>

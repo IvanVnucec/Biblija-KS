@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ListBibleBooksActivity extends AppCompatActivity {
+    String[] sorted_bible_book_names;
+    String[] sorted_bible_book_paths;
     private static final String BIBLE_DIR_PATH = "bible";
 
     @Override
@@ -25,17 +27,18 @@ public class ListBibleBooksActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_bible_books);
 
-        ListView listView = findViewById(R.id.activity_list_bible_books);
-        ArrayList<String> book_filenames = getBookFilenamesFromPath(BIBLE_DIR_PATH);
-        ArrayList<String> book_names_clean = getCleanBookNames(book_filenames);
+        sorted_bible_book_names = getResources().getStringArray(R.array.sorted_bible_book_names);
+        sorted_bible_book_paths = getResources().getStringArray(R.array.sorted_bible_book_paths);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.list_view_row, book_names_clean);
+        ListView listView = findViewById(R.id.activity_list_bible_books);
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.list_view_row, sorted_bible_book_names);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                listBibleChaptersFromBook(book_filenames.get(i));
+                listBibleChaptersFromBook(sorted_bible_book_paths[i]);
             }
 
             private void listBibleChaptersFromBook(String book_name) {
