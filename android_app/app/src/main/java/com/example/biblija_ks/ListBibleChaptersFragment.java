@@ -1,57 +1,77 @@
 package com.example.biblija_ks;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.example.biblija_ks.databinding.FragmentListBibleChaptersBinding;
+
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 import java.util.Scanner;
 
-public class ListBibleChaptersActivity extends AppCompatActivity {
+public class ListBibleChaptersFragment extends Fragment {
+
+    private FragmentListBibleChaptersBinding binding;
     private static final String BIBLE_DIR_PATH = "bible";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_bible_chapters);
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+        binding = FragmentListBibleChaptersBinding.inflate(inflater, container, false);
 
-        Intent intent = getIntent();
-        String book_name = getBookName(intent);
-        ListView listView = findViewById(R.id.activity_list_bible_chapters);
+        ListView listView = binding.getRoot().findViewById(R.id.list_view_bible_chapters);
+
+        Bundle bundle = getArguments();
+        String book_name = getBookName(bundle);
         ArrayList<String> chapter_filenames = getBibleChapterNames(book_name);
         ArrayList<String> chapter_names_clean = getCleanChapterNames(chapter_filenames);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.list_view_row, chapter_names_clean);
-        listView.setAdapter(arrayAdapter);
+        ArrayAdapter<String> allItemsAdapter = new ArrayAdapter<>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, chapter_names_clean);
+        listView.setAdapter(allItemsAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                showTextFromBibleChapters(chapter_filenames, i);
-            }
-
-            private void showTextFromBibleChapters(ArrayList<String> chapters, int wanted_chapter_index) {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int i, long id) {
                 ArrayList<String> chapter_paths = new ArrayList<>();
-                for (String chapter : chapters)
+                for (String chapter : chapter_filenames)
                     chapter_paths.add(BIBLE_DIR_PATH + '/' + book_name + '/' + chapter);
 
-                Intent intent = new Intent(getApplicationContext(), ShowBibleChapterTextActivity.class);
-                intent.putExtra(getString(R.string.extra_chapter_path), chapter_paths);
-                intent.putExtra(getString(R.string.wanted_chapter_index), wanted_chapter_index);
-                startActivity(intent);
+                // TODO: send data to the MainActivity
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList(getString(R.string.extra_chapter_path), chapter_paths);
+                bundle.putInt(getString(R.string.wanted_chapter_index), i);
+
+                NavHostFragment.findNavController(ListBibleChaptersFragment.this)
+                        .navigate(R.id.action_ListBibleChaptersFragment_to_screenSlidePageFragment, bundle);
             }
         });
+
+        return binding.getRoot();
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
     private ArrayList<String> getCleanChapterNames(ArrayList<String> chapter_filenames) {
@@ -67,18 +87,18 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
         return clean_book_names;
     }
 
-    private String getBookName(Intent intent) {
-        return intent.getStringExtra(getString(R.string.extra_book_name));
+    private String getBookName(Bundle bundle) {
+        return bundle.getString(getString(R.string.extra_book_name));
     }
 
     private ArrayList<String> getBibleChapterNames(String book_name) {
         ArrayList<String> chapter_names = null;
 
         try {
-            String [] list = this.getAssets().list(BIBLE_DIR_PATH + '/' + book_name);
+            String [] list = getActivity().getAssets().list(BIBLE_DIR_PATH + '/' + book_name);
             chapter_names = new ArrayList<String>(Arrays.asList(list));
         } catch (IOException e) {
-            finish();
+            getActivity().finish();
         }
 
         Comparator<? super String> ascending_comparator = new Comparator<String>() {
@@ -98,4 +118,5 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
 
         return chapter_names;
     }
+
 }

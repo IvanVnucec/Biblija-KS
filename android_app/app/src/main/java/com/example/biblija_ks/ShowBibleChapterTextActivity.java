@@ -23,22 +23,9 @@ import java.util.Map;
 
 
 public class ShowBibleChapterTextActivity extends FragmentActivity {
-    /**
-     * The number of pages (wizard steps) to show in this demo.
-     */
     private int num_of_chapters;
-
-    /**
-     * The pager widget, which handles animation and allows swiping horizontally to access previous
-     * and next wizard steps.
-     */
     private ViewPager2 viewPager;
-
-    /**
-     * The pager adapter, which provides the pages to the view pager widget.
-     */
     private FragmentStateAdapter pagerAdapter;
-
     private ArrayList<String> chapter_texts;
 
     @Override
@@ -51,6 +38,7 @@ public class ShowBibleChapterTextActivity extends FragmentActivity {
         pagerAdapter = new ScreenSlidePagerAdapter(this);
         viewPager.setAdapter(pagerAdapter);
 
+        // TODO: get data from main activity which initially got data from ListBibleChaptersFragment
         Intent intent = getIntent();
         ArrayList<String> chapter_paths = getChapterPaths(intent);
         chapter_texts = getChapterTexts(chapter_paths);
