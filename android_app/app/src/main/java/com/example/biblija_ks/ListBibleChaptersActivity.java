@@ -19,17 +19,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ListBibleChaptersActivity extends AppCompatActivity {
-    private static final String BIBLE_DIR_PATH = "bible";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_bible_chapters);
 
         Intent intent = getIntent();
-        String book_name = getBookName(intent);
+        String book_path = getBookPath(intent);
         ListView listView = findViewById(R.id.activity_list_bible_chapters);
-        ArrayList<String> chapter_filenames = getBibleChapterNames(book_name);
+        ArrayList<String> chapter_filenames = getBibleChapterNames(book_path);
         ArrayList<String> chapter_names_clean = getCleanChapterNames(chapter_filenames);
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.list_view_row, chapter_names_clean);
@@ -44,7 +42,7 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
             private void showTextFromBibleChapters(ArrayList<String> chapters, int wanted_chapter_index) {
                 ArrayList<String> chapter_paths = new ArrayList<>();
                 for (String chapter : chapters)
-                    chapter_paths.add(BIBLE_DIR_PATH + '/' + book_name + '/' + chapter);
+                    chapter_paths.add(book_path + '/' + chapter);
 
                 Intent intent = new Intent(getApplicationContext(), ShowBibleChapterTextActivity.class);
                 intent.putExtra(getString(R.string.extra_chapter_path), chapter_paths);
@@ -67,15 +65,15 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
         return clean_book_names;
     }
 
-    private String getBookName(Intent intent) {
+    private String getBookPath(Intent intent) {
         return intent.getStringExtra(getString(R.string.extra_book_name));
     }
 
-    private ArrayList<String> getBibleChapterNames(String book_name) {
+    private ArrayList<String> getBibleChapterNames(String book_path) {
         ArrayList<String> chapter_names = null;
 
         try {
-            String [] list = this.getAssets().list(BIBLE_DIR_PATH + '/' + book_name);
+            String [] list = this.getAssets().list(book_path);
             chapter_names = new ArrayList<String>(Arrays.asList(list));
         } catch (IOException e) {
             finish();
