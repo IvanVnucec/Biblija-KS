@@ -29,7 +29,7 @@ public class ListBibleBooksActivity extends AppCompatActivity {
         ArrayList<String> book_filenames = getBookFilenamesFromPath(BIBLE_DIR_PATH);
         ArrayList<String> book_names_clean = getCleanBookNames(book_filenames);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.list_view_row, book_names_clean);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, book_names_clean);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

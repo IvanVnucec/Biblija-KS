@@ -32,7 +32,7 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
         ArrayList<String> chapter_filenames = getBibleChapterNames(book_name);
         ArrayList<String> chapter_names_clean = getCleanChapterNames(chapter_filenames);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.list_view_row, chapter_names_clean);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, chapter_names_clean);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
