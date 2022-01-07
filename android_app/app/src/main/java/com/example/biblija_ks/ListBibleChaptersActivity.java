@@ -81,8 +81,8 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
 
         Comparator<? super String> ascending_comparator = new Comparator<String>() {
             public int compare(String name1, String name2) {
-                int num1 = new Scanner(name1).useDelimiter("\\D+").nextInt();
-                int num2 = new Scanner(name2).useDelimiter("\\D+").nextInt();
+                int num1 = Integer.parseInt(name1.replaceAll("[^0-9]", ""));
+                int num2 = Integer.parseInt(name2.replaceAll("[^0-9]", ""));
                 // > : Increasing order
                 // < : Decreasing order
                 if(num1 > num2)
