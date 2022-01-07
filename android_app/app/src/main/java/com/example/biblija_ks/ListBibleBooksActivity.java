@@ -20,7 +20,6 @@ import java.util.Arrays;
 public class ListBibleBooksActivity extends AppCompatActivity {
     String[] sorted_bible_book_names;
     String[] sorted_bible_book_paths;
-    private static final String BIBLE_DIR_PATH = "bible";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,26 +67,4 @@ public class ListBibleBooksActivity extends AppCompatActivity {
         }
     }
 
-    private ArrayList<String> getCleanBookNames(ArrayList<String> book_filenames) {
-        ArrayList<String> clean_book_names = new ArrayList<>();
-
-        for(String book_name : book_filenames) {
-            clean_book_names.add(book_name.replaceAll("_", " "));
-        }
-
-        return clean_book_names;
-    }
-
-    private ArrayList<String> getBookFilenamesFromPath(String path) {
-        ArrayList<String> stringList = null;
-
-        try {
-            String [] list = this.getAssets().list(path);
-            stringList = new ArrayList<String>(Arrays.asList(list));
-        } catch (IOException e) {
-            finish();
-        }
-
-        return stringList;
-    }
 }
