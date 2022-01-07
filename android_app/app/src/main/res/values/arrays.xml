@@ -143,11 +143,11 @@
         <item>bible/Filemonu</item>
         <item>bible/Hebrejima</item>
         <item>bible/Jakovljeva_poslanica</item>
-        <item>bible/I_Petrova_poslanica</item>
-        <item>bible/II_Petrova_poslanica</item>
-        <item>bible/I_Ivanova_poslanica</item>
-        <item>bible/II_Ivanova_poslanica</item>
-        <item>bible/III_Ivanova_poslanica</item>
+        <item>bible/I._Petrova_poslanica</item>
+        <item>bible/II._Petrova_poslanica</item>
+        <item>bible/I._Ivanova_poslanica</item>
+        <item>bible/II._Ivanova_poslanica</item>
+        <item>bible/III._Ivanova_poslanica</item>
         <item>bible/Poslanica_Jude_apostola</item>
         <item>bible/Otkrivenje</item>
     </string-array>
