@@ -28,9 +28,9 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
         String book_path = getBookPath(intent);
         ListView listView = findViewById(R.id.activity_list_bible_chapters);
         ArrayList<String> chapter_filenames = getBibleChapterNames(book_path);
-        ArrayList<String> chapter_names_clean = getCleanChapterNames(chapter_filenames);
+        ArrayList<String> chapter_names = getChapterNames(chapter_filenames.size());
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, chapter_names_clean);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, chapter_names);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -52,17 +52,14 @@ public class ListBibleChaptersActivity extends AppCompatActivity {
         });
     }
 
-    private ArrayList<String> getCleanChapterNames(ArrayList<String> chapter_filenames) {
-        ArrayList<String> clean_book_names = new ArrayList<>();
+    private ArrayList<String> getChapterNames(int size) {
+        ArrayList<String> chapter_names = new ArrayList<>(size);
 
-        for(String book_name : chapter_filenames) {
-            book_name = book_name
-                    .replaceAll("_", " ")
-                    .replaceAll(".html", "");
-            clean_book_names.add(book_name);
+        for(int i=0; i<size; i++) {
+            chapter_names.add("Glava " + i);
         }
 
-        return clean_book_names;
+        return chapter_names;
     }
 
     private String getBookPath(Intent intent) {
