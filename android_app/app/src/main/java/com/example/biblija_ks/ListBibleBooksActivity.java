@@ -41,10 +41,10 @@ public class ListBibleBooksActivity extends AppCompatActivity {
                 listBibleChaptersFromBook(sorted_bible_book_paths[i]);
             }
 
-            private void listBibleChaptersFromBook(String book_name) {
+            private void listBibleChaptersFromBook(String book_path) {
                 Intent intent = new Intent(getApplicationContext(), ListBibleChaptersActivity.class);
 
-                intent.putExtra(getString(R.string.extra_book_name), book_name);
+                intent.putExtra(getString(R.string.extra_book_name), book_path);
                 startActivity(intent);
             }
         });
