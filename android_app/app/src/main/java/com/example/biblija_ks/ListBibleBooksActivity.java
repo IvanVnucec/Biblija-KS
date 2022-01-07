@@ -32,7 +32,7 @@ public class ListBibleBooksActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.activity_list_bible_books);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.list_view_row, sorted_bible_book_names);
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, sorted_bible_book_names);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
