@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: MyHome()
+    );
+  }
+}
+
+class MyHome extends StatelessWidget {
+  const MyHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +39,26 @@ class MyApp extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              TestamentButtons('Stari zavjet'),
-              TestamentButtons('Novi zavjet'),
+              TestamentButtons(
+                title: 'Stari zavjet',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ListOldTestamentBooks()),
+                  );
+                },
+              ),
+              TestamentButtons(
+                title: 'Novi zavjet',
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ListNewTestamentBooks()),
+                  );
+                },
+              ),
             ],
           ),
         ),
@@ -42,7 +69,8 @@ class MyApp extends StatelessWidget {
 }
 
 class TestamentButtons extends ClipRRect {
-  TestamentButtons(String title, {Key? key})
+  TestamentButtons(
+      {required String title, required VoidCallback? onPressed, Key? key})
       : super(
           key: key,
           borderRadius: BorderRadius.circular(10),
@@ -68,10 +96,52 @@ class TestamentButtons extends ClipRRect {
                   textStyle: const TextStyle(
                       fontSize: 25, fontWeight: FontWeight.w500),
                 ),
-                onPressed: () {},
+                onPressed: onPressed,
                 child: Text(title),
               ),
             ],
           ),
         );
+}
+
+class ListOldTestamentBooks extends StatelessWidget {
+  const ListOldTestamentBooks({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Second Route'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Go back!'),
+        ),
+      ),
+    );
+  }
+}
+
+class ListNewTestamentBooks extends StatelessWidget {
+  const ListNewTestamentBooks({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Second Route'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Go back!'),
+        ),
+      ),
+    );
+  }
 }
