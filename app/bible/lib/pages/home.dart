@@ -11,8 +11,8 @@ class MyHome extends StatelessWidget {
       title: 'Biblija',
       home: Scaffold(
         appBar: AppBar(
-            foregroundColor: Colors.black,
-            backgroundColor: Colors.white,
+            foregroundColor: Colors.white,
+            backgroundColor: const Color.fromRGBO(35, 35, 35, 1.0),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -28,7 +28,7 @@ class MyHome extends StatelessWidget {
                 ),
               ],
             )),
-        backgroundColor: Colors.black,
+        backgroundColor: const Color.fromRGBO(22, 22, 22, 1.0),
         body: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -73,11 +73,11 @@ class TestamentButtons extends ClipRRect {
               Positioned.fill(
                 child: Container(
                   decoration: const BoxDecoration(
-                    gradient: LinearGradient(
+                    gradient: RadialGradient(
+                      radius: 3.0,
                       colors: <Color>[
-                        Color(0xFF0D47A1),
-                        Color(0xFF1976D2),
-                        Color(0xFF42A5F5)
+                        Color.fromRGBO(114, 9, 183, 1.0),
+                        Color.fromRGBO(72, 12, 168, 1.0),
                       ],
                     ),
                   ),
