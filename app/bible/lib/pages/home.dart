@@ -1,5 +1,6 @@
 import 'package:bible/pages/settings.dart';
 import 'package:bible/pages/testament_list.dart';
+import 'package:bible/res/colors.dart';
 import 'package:flutter/material.dart';
 
 class MyHome extends StatelessWidget {
@@ -11,8 +12,8 @@ class MyHome extends StatelessWidget {
       title: 'Biblija',
       home: Scaffold(
         appBar: AppBar(
-            foregroundColor: Colors.white,
-            backgroundColor: const Color.fromRGBO(35, 35, 35, 1.0),
+            foregroundColor: MyColors.appBarForegroundColor,
+            backgroundColor: MyColors.appBarBackgroundColor,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -28,7 +29,7 @@ class MyHome extends StatelessWidget {
                 ),
               ],
             )),
-        backgroundColor: const Color.fromRGBO(22, 22, 22, 1.0),
+        backgroundColor: MyColors.homeBackgroundColor,
         body: Center(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -75,10 +76,7 @@ class TestamentButtons extends ClipRRect {
                   decoration: const BoxDecoration(
                     gradient: RadialGradient(
                       radius: 3.0,
-                      colors: <Color>[
-                        Color.fromRGBO(114, 9, 183, 1.0),
-                        Color.fromRGBO(72, 12, 168, 1.0),
-                      ],
+                      colors: MyColors.testamentButtonBackgroundColors,
                     ),
                   ),
                 ),
@@ -86,7 +84,7 @@ class TestamentButtons extends ClipRRect {
               TextButton(
                 style: TextButton.styleFrom(
                   padding: const EdgeInsets.all(20.0),
-                  primary: Colors.white,
+                  primary: MyColors.testamentButtonTextColor,
                   textStyle: const TextStyle(
                       fontSize: 25, fontWeight: FontWeight.w500),
                 ),
