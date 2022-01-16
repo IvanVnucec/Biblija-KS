@@ -50,7 +50,8 @@ class MyHome extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => const ListNewTestamentBooks()),
+                        // TODO: switch to the new testament book list
+                        builder: (context) => const ListOldTestamentBooks()),
                   );
                 },
               ),
