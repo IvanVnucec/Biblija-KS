@@ -1,26 +1,14 @@
 import 'package:bible/pages/chapter_list.dart';
 import 'package:bible/res/colors.dart';
+import 'package:bible/widgets/list_tile.dart';
 import 'package:flutter/material.dart';
-
-class TestamentBookListTile extends ListTile {
-  TestamentBookListTile(String bookName, String bookPath, Function onTap,
-      {Key? key})
-      : super(
-          key: key,
-          title: Text(bookName),
-          textColor: MyColors.appBarForegroundColor,
-          onTap: () {
-            onTap(bookPath);
-          },
-        );
-}
 
 class ListOldTestamentBooks extends StatelessWidget {
   static late BuildContext _context;
 
   static Future<void> changeContextOnTap(String bookPath) async {
-    Navigator.push(
-        _context, MaterialPageRoute(builder: (context) => ChaptersList(bookPath)));
+    Navigator.push(_context,
+        MaterialPageRoute(builder: (context) => ChaptersList(bookPath)));
   }
 
   static var oldTestamentBooksSortedList = <Widget>[
