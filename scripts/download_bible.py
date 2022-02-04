@@ -1,7 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 from pathlib import Path
-from time import sleep
 
 class Book:
     def __init__(self, name='', url='') -> None:
