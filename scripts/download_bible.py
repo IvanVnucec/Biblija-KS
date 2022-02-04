@@ -1,3 +1,8 @@
+"""
+Download all the bible text from http://www.ks.hr/hr-biblija-text/ into bible folder.
+Caution: This might overload their servers because no delay is implemented. Use with caution.
+"""
+
 import requests
 from bs4 import BeautifulSoup
 from pathlib import Path
