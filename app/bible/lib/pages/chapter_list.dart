@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:bible/pages/reading_page.dart';
 import 'package:bible/res/colors.dart';
 import 'package:bible/widgets/list_tile.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,16 @@ class ChaptersList extends StatefulWidget {
 }
 
 class _ChaptersListState extends State<ChaptersList> {
+  static late BuildContext _context;
+
+  static void changeContextOnTap(String chapterPath) {
+    Navigator.push(_context,
+        MaterialPageRoute(builder: (context) => ReadingPage(chapterPath)));
+  }
+
   @override
   Widget build(BuildContext context) {
+    _context = context;
     // TODO: get files list
     return Scaffold(
       appBar: AppBar(
@@ -26,9 +35,18 @@ class _ChaptersListState extends State<ChaptersList> {
       body: Center(
         child: ListView(
           children: [
-            TestamentBookListTile("Glava 1", "", (String book_path) {}),
-            TestamentBookListTile("Glava 2", "", (String book_path) {}),
-            TestamentBookListTile("Glava 3", "", (String book_path) {}),
+            TestamentBookListTile("Glava 1", "", (String chapterPath) {
+              changeContextOnTap(chapterPath);
+            }),
+            TestamentBookListTile("Glava 2", "", (String chapterPath) {
+              changeContextOnTap(chapterPath);
+            }),
+            TestamentBookListTile("Glava 3", "", (String chapterPath) {
+              changeContextOnTap(chapterPath);
+            }),
+            TestamentBookListTile("Glava 4", "", (String chapterPath) {
+              changeContextOnTap(chapterPath);
+            }),
           ],
         ),
       ),
